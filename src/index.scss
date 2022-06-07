@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	margin: 0;
+	// border: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'IBM Plex Sans', sans-serif;
+	overflow-x: hidden;
+}
+
+.main {
+	position: relative;
+	background-image: url('../public/assets/png/figure.png'); /* The image used */
+	background-position: center bottom; /* Center the image */
+	background-repeat: no-repeat; /* Do not repeat the image */
+	background-size: 28%; /* Resize the background image to cover the entire container */
+	min-height: 79vh;
+	height: 100%;
+
+	&::after {
+		content: '';
+		position: absolute;
+		right: -495px;
+		top: 0;
+		width: 900px;
+		height: 650px;
+		background-image: url('../public/assets/png/bg.png');
+		background-repeat: no-repeat; /* Do not repeat the image */
+		background-size: cover;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and down) */
+@media only screen and (max-width: 768px) {
+	.main {
+		&::after {
+			right: -250px;
+			width: 400px;
+			height: 450px;
+		}
+	}
+}
