@@ -2,7 +2,7 @@ import React from 'react';
 import { Input } from './Input';
 import ClipLoader from "react-spinners/ClipLoader";
 
-const Form = ({ setCode, setCoinCode, fetchPrices, code, loading, refetch }) => {
+const Form = ({ setCode, setCoinCode, fetchPrices, code, loading, }) => {
     const handleChange = (e) => {
         setCode(e.target.value.toUpperCase());
     };
@@ -11,7 +11,6 @@ const Form = ({ setCode, setCoinCode, fetchPrices, code, loading, refetch }) => 
         e.preventDefault();
         setCoinCode(code);
         fetchPrices();
-        refetch();
     };
 
     return (

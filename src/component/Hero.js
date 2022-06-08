@@ -12,7 +12,7 @@ const Hero = () => {
     const [code, setCode] = React.useState("");
     const [coinCode, setCoinCode] = React.useState("");
 
-    const [fetchPrices, { loading, error, refetch }] = useLazyQuery(PRICE,
+    const [fetchPrices, { loading, error }] = useLazyQuery(PRICE,
         {
             variables: {
                 input: coinCode
@@ -52,7 +52,7 @@ const Hero = () => {
             <section>
                 <div className='w-full flex flex-col lg:flex-row flex-wrap gap-y-6 items-center justify-between'>
                     <Intro />
-                    <Form setCode={setCode} setCoinCode={setCoinCode} fetchPrices={fetchPrices} refetch={refetch} code={code} loading={loading} />
+                    <Form setCode={setCode} setCoinCode={setCoinCode} fetchPrices={fetchPrices} code={code} loading={loading} />
                 </div>
 
                 <CryptoList data={coins} setCoins={setCoins} />
