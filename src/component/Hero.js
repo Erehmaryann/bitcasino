@@ -1,38 +1,68 @@
 import React from "react";
 import CryptoList from './CryptoList';
-import { Input } from './Input';
-import {
-    useLazyQuery,
-    gql
-} from "@apollo/client";
-
-const PRICE = gql`
-	query price($input: String!) {
-        markets(
-            filter: { baseSymbol: {_eq: $input}, quoteSymbol: {_eq: "EUR"} }
-        ) {
-            marketSymbol
-                ticker {
-                lastPrice
-            }
-        }
-    }
-`;
-
+import { useLazyQuery } from "@apollo/client";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { PRICE } from "./query/query";
+import Form from './Form';
 
 const Hero = () => {
-    // const [input, setInput] = React.useState("");
+    const [coins, setCoins] = React.useState([]);
+    const [code, setCode] = React.useState("");
+    const [coinCode, setCoinCode] = React.useState("");
 
-    const [fetchPrices, { loading, error, data, refetch }] = useLazyQuery(PRICE, {
-        variables: {
-            input: "BTC"
-        }
-    });
+    const [fetchPrices, { loading, error, refetch }] = useLazyQuery(PRICE);
 
-    console.log(data);
+    const handleChange = (e) => {
+        setCode(e.target.value.toUpperCase());
+    };
+
+    const getCoinPrice = (e) => {
+        e.preventDefault();
+        setCoinCode(code);
+        fetchPrices({
+            variables: {
+                input: coinCode
+            },
+            fetchPolicy: "no-cache",
+            onCompleted: (data) => {
+                let coinsExist = coins.find(coin => coin.code === coinCode);
+                let noCoinsFound = data.markets.length === 0;
+                if (coinsExist) {
+                    toast.error("Coin already exists");
+                    setCode("");
+                    return;
+                } else if (noCoinsFound) {
+                    toast.error("Coin not found");
+                    setCode("");
+                    return;
+                };
+
+                if (data && !noCoinsFound) {
+                    setCoins([...coins, {
+                        code: coinCode,
+                        price: data.markets[0].ticker.lastPrice
+                    }]);
+                    setCode("");
+                };
+
+            },
+            onError: (error) => {
+                alert(error.message);
+            }
+        });
+        refetch();
+    };
+
+    const deleteCoin = (e, code) => {
+        e.preventDefault();
+        setCoins(coins.filter(coin => coin.code !== code));
+    };
+
+    if (error) return <p style={{ color: "white", paddingTop: "2rem", fontSize: "1.5rem" }}>Error! `${error}`</p>;
 
     return (
-        <main className='my-4 lg:mt-10 lg:mb-9'>
+        <main className='my-4 lg:mt-10 lg:mb-9' data-testid="hero">
             <section>
                 <div className='w-full flex flex-col lg:flex-row flex-wrap gap-y-6 items-center justify-between'>
                     <div className='flex-1 z-10'>
@@ -47,32 +77,12 @@ const Hero = () => {
                             form to the right.
                         </p>
                     </div>
-                    <div className='flex-1 w-full flex md:justify-end z-10'>
-                        <div className='w-full lg:w-[60%] bg-white p-6 lg:px-8 lg:py-6 flex flex-col rounded'>
-                            <form className='flex flex-col'>
-                                <Input
-                                    label='CRYPTOCURRENCY CODE'
-                                    variant='outlined'
-                                    size='small'
-                                    id='outlined-size-small'
-                                    margin='normal'
-                                // defaultValue='BTC'
-                                // value={code}
-                                // onChange={handleChange}
-                                />
-                                <button className='border-0 outline-none bg-[#fd4b24] p-[10px] text-white rounded-[20px] text-sm mb-10 flex items-center justify-center'>
-                                    Add
-                                </button>
-                            </form>
-                            <p className='text-sm text-gray-400 text-center tracking-[0.5px]'>
-                                Use of this service is subject to terms and conditions.
-                            </p>
-                        </div>
-                    </div>
+                    <Form handleChange={handleChange} getCoinPrice={getCoinPrice} code={code} loading={loading} />
                 </div>
 
-                <CryptoList />
+                <CryptoList data={coins} deleteCoin={deleteCoin} />
             </section>
+            <ToastContainer />
         </main>
     );
 };
