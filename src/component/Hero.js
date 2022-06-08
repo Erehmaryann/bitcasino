@@ -1,11 +1,12 @@
-import React from "react";
-import CryptoList from './CryptoList';
+import React, { lazy } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PRICE } from "./query/query";
-import Form from './Form';
-import Intro from './Intro';
+
+const CryptoList = lazy(() => import("./CryptoList"));
+const Form = lazy(() => import("./Form"));
+const Intro = lazy(() => import("./Intro"));
 
 const Hero = () => {
     const [coins, setCoins] = React.useState([]);
@@ -48,9 +49,9 @@ const Hero = () => {
     if (error) return <p style={{ color: "white", paddingTop: "2rem", fontSize: "1.5rem" }}>Error! `${error}`</p>;
 
     return (
-        <main className='my-4 lg:mt-10 lg:mb-9' data-testid="hero">
+        <main className="my-4 lg:mt-10 lg:mb-9" data-testid="hero">
             <section>
-                <div className='w-full flex flex-col lg:flex-row flex-wrap gap-y-6 items-center justify-between'>
+                <div className="w-full flex flex-col lg:flex-row flex-wrap gap-y-6 items-center justify-between">
                     <Intro />
                     <Form setCode={setCode} setCoinCode={setCoinCode} fetchPrices={fetchPrices} code={code} loading={loading} />
                 </div>
