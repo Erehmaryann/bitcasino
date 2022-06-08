@@ -2,7 +2,18 @@ import React from 'react';
 import { Input } from './Input';
 import ClipLoader from "react-spinners/ClipLoader";
 
-const Form = ({ getCoinPrice, handleChange, code, loading }) => {
+const Form = ({ setCode, setCoinCode, fetchPrices, code, loading, refetch }) => {
+    const handleChange = (e) => {
+        setCode(e.target.value.toUpperCase());
+    };
+
+    const getCoinPrice = (e) => {
+        e.preventDefault();
+        setCoinCode(code);
+        fetchPrices();
+        refetch();
+    };
+
     return (
         <div className='flex-1 w-full flex md:justify-end z-10'>
             <div className='w-full lg:w-[60%] bg-white p-6 lg:px-8 lg:py-6 flex flex-col rounded'>

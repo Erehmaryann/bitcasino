@@ -1,7 +1,12 @@
 import React from 'react';
 import CloseIcon from "@mui/icons-material/Close";
 
-const CryptoList = ({ data, deleteCoin }) => {
+const CryptoList = ({ data, setCoins }) => {
+
+    const deleteCoin = (e, code) => {
+        e.preventDefault();
+        setCoins(data.filter(coin => coin.code !== code));
+    };
 
     return (
         <div className='mt-[32px] z-[20] pb-[28px]' data-testid="crypto-list">
