@@ -49,7 +49,7 @@ const Hero = () => {
 
             },
             onError: (error) => {
-                alert(error.message);
+                toast.error(error.message);
             }
         });
         refetch();
