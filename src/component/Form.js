@@ -6,7 +6,7 @@ const Form = ({ getCoinPrice, handleChange, code, loading }) => {
     return (
         <div className='flex-1 w-full flex md:justify-end z-10'>
             <div className='w-full lg:w-[60%] bg-white p-6 lg:px-8 lg:py-6 flex flex-col rounded'>
-                <form onSubmit={getCoinPrice} className='flex flex-col'>
+                <form onSubmit={getCoinPrice} className='flex flex-col' data-testid="form">
                     <Input
                         label='CRYPTOCURRENCY CODE'
                         variant='outlined'

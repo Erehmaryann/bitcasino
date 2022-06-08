@@ -28,6 +28,7 @@ const Hero = () => {
             onCompleted: (data) => {
                 let coinsExist = coins.find(coin => coin.code === coinCode);
                 let noCoinsFound = data.markets.length === 0;
+
                 if (coinsExist) {
                     toast.error("Coin already exists");
                     setCode("");
