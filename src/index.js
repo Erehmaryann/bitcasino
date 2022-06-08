@@ -8,6 +8,7 @@ import {
 import reportWebVitals from "./reportWebVitals";
 import "./index.scss";
 const App = lazy(() => import("./App"));
+const ErrorBoundary = lazy(() => import("./component/ErrorBoundary"));
 
 const renderLoader = () => <p className="loading-text">Loading...</p>;
 const client = new ApolloClient({
@@ -17,11 +18,13 @@ const client = new ApolloClient({
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Suspense fallback={renderLoader()}>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
-  </Suspense>
+  <ErrorBoundary>
+    <Suspense fallback={renderLoader()}>
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    </Suspense>
+  </ErrorBoundary>
 );
 
 // If you want to start measuring performance in your app, pass a function
