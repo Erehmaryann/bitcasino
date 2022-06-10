@@ -24,6 +24,7 @@ const Form = ({ setCode, setCoinCode, fetchPrices, code, loading, }) => {
                         id="outlined-size-small"
                         margin="normal"
                         value={code}
+                        autoFocus
                         onChange={handleChange}
                         data-testid="crypto-code-input"
                     />
