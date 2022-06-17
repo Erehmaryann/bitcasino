@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import PropTypes from "prop-types";
 
 export const PRICE = gql`
 	query price($input: String!) {
@@ -10,3 +11,11 @@ export const PRICE = gql`
         }
     }
 `;
+
+PRICE.propTypes = {
+    input: PropTypes.string.isRequired,
+    marketSymbol: PropTypes.string,
+    ticket: {
+        lastPrice: PropTypes.string,
+    }
+};
