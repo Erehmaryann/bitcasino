@@ -1,51 +1,14 @@
 import React, { lazy } from "react";
 import PropTypes from "prop-types";
-import { useLazyQuery } from "@apollo/client";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { PRICE } from "./query/query";
+import { ToastContainer } from "react-toastify";
+import useCoinData from '../hooks/useCoinData';
 
 const CryptoList = lazy(() => import("./CryptoList"));
 const Form = lazy(() => import("./Form"));
 const Intro = lazy(() => import("./Intro"));
 
 const Hero = () => {
-    const [coins, setCoins] = React.useState([]);
-    const [code, setCode] = React.useState("");
-    const [coinCode, setCoinCode] = React.useState("");
-
-    const [fetchPrices, { loading, error }] = useLazyQuery(PRICE,
-        {
-            variables: {
-                input: coinCode
-            },
-            fetchPolicy: "network only",
-            onCompleted: (data) => {
-                let coinsExist = coins.find(coin => coin.code === coinCode);
-                let noCoinsFound = data.markets.length === 0;
-
-                if (coinsExist) {
-                    toast.error("Coin already exists");
-                    setCode("");
-                    return;
-                }
-
-                if (data && noCoinsFound) {
-                    toast.error("Coin not found");
-                    setCode("");
-                    return;
-                }
-
-                setCoins([...coins, {
-                    code: coinCode,
-                    price: data.markets[0].ticker.lastPrice
-                }]);
-                setCode("");
-            },
-            onError: (error) => {
-                toast.error(error.message);
-            }
-        });
+    const { coins, code, loading, error, setCode, setCoinCode, fetchPrices, setCoins } = useCoinData();
 
     if (error) return <p style={{ color: "white", paddingTop: "2rem", fontSize: "1.5rem" }}>Error! `${error}`</p>;
 

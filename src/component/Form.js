@@ -29,6 +29,7 @@ const Form = ({ setCode, setCoinCode, fetchPrices, code, loading, }) => {
                         data-testid="crypto-code-input"
                     />
                     <button
+                        type="submit"
                         data-testid="crypto-code-button"
                         disabled={!code || loading}
                         className="disabled:bg-[#fd4c24bc] disabled:cursor-not-allowed border-0 outline-none bg-[#fd4b24] p-[10px] text-white rounded-[20px] text-sm mb-10 flex items-center justify-center">
