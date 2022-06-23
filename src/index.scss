@@ -9,13 +9,17 @@
 }
 
 body {
-	font-family: 'IBM Plex Sans', sans-serif;
+	font-family: "IBM Plex Sans", sans-serif;
 	overflow-x: hidden;
+
+	a {
+		text-decoration: none;
+	}
 }
 
 .main {
 	position: relative;
-	background-image: url('../public/assets/png/figure.png'); /* The image used */
+	background-image: url("../public/assets/png/figure.png"); /* The image used */
 	background-position: center bottom; /* Center the image */
 	background-repeat: no-repeat; /* Do not repeat the image */
 	background-size: 28%; /* Resize the background image to cover the entire container */
@@ -23,13 +27,13 @@ body {
 	height: 100%;
 
 	&::after {
-		content: '';
+		content: "";
 		position: absolute;
 		right: -495px;
 		top: 0;
 		width: 900px;
 		height: 650px;
-		background-image: url('../public/assets/png/bg.png');
+		background-image: url("../public/assets/png/bg.png");
 		background-repeat: no-repeat; /* Do not repeat the image */
 		background-size: cover;
 	}

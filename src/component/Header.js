@@ -5,7 +5,7 @@ const Header = () => {
         <header>
             <nav>
                 <a href="/">
-                    <img src="/assets/svg/logo.svg" alt="logo" />
+                    <img src="/assets/svg/bitcasino-logo.svg" alt="Home of Bitcasino" />
                 </a>
             </nav>
         </header>
