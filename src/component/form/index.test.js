@@ -1,5 +1,5 @@
 import { render, screen, } from "@testing-library/react";
-import Form from "../Form";
+import Form from "./index";
 
 describe("form component", () => {
     // check if the component renders

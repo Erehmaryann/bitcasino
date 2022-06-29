@@ -1,6 +1,6 @@
 import React from "react";
 import ClipLoader from "react-spinners/ClipLoader";
-import { Input } from "./Input";
+import { Input } from "../input";
 
 const Form = ({ setCode, setCoinCode, fetchPrices, code, loading, }) => {
     const handleChange = (e) => {

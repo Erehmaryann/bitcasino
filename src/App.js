@@ -1,7 +1,7 @@
 import React, { lazy } from "react";
-const Footer = lazy(() => import("./component/Footer"));
-const Header = lazy(() => import("./component/Header"));
-const Hero = lazy(() => import("./component/Hero"));
+const Footer = lazy(() => import("./component/footer"));
+const Header = lazy(() => import("./component/header"));
+const Hero = lazy(() => import("./component/hero"));
 
 function App() {
   return (

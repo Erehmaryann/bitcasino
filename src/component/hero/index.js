@@ -1,11 +1,11 @@
 import React, { lazy } from "react";
 import PropTypes from "prop-types";
 import { ToastContainer } from "react-toastify";
-import useCoinData from '../hooks/useCoinData';
+import useCoinData from '../../hooks/useCoinData';
 
-const CryptoList = lazy(() => import("./CryptoList"));
-const Form = lazy(() => import("./Form"));
-const Intro = lazy(() => import("./Intro"));
+const CryptoList = lazy(() => import("../cryptoList"));
+const Form = lazy(() => import("../form"));
+const Intro = lazy(() => import("../intro"));
 
 const Hero = () => {
     const { coins, code, loading, error, setCode, setCoinCode, fetchPrices, setCoins } = useCoinData();

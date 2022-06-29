@@ -8,7 +8,7 @@ import {
 import reportWebVitals from "./reportWebVitals";
 import "./index.scss";
 const App = lazy(() => import("./App"));
-const ErrorBoundary = lazy(() => import("./component/ErrorBoundary"));
+const ErrorBoundary = lazy(() => import("./component/errorBoundary"));
 
 const renderLoader = () => <p className="loading-text">Loading...</p>;
 const client = new ApolloClient({
