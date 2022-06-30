@@ -16,8 +16,8 @@ export default function useCoinData() {
             },
             fetchPolicy: "network only",
             onCompleted: (data) => {
-                let coinsExist = coins.find(coin => coin.code === coinCode);
-                let noCoinsFound = data.markets.length === 0;
+                let coinsExist = coins?.find(coin => coin.code === coinCode);
+                let noCoinsFound = data?.markets?.length === 0;
 
                 if (coinsExist) {
                     toast.error("Coin already exists");
@@ -33,7 +33,7 @@ export default function useCoinData() {
 
                 setCoins([...coins, {
                     code: coinCode,
-                    price: data.markets[0].ticker.lastPrice
+                    price: data?.markets[0]?.ticker?.lastPrice
                 }]);
                 setCode("");
             },
