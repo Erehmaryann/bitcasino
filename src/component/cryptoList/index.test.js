@@ -1,5 +1,5 @@
 /* eslint-disable testing-library/no-unnecessary-act */
-import CryptoList from '.';
+import CryptoList from './index';
 import { render, screen, fireEvent } from "@testing-library/react";
 import { act } from 'react-dom/test-utils';
 
