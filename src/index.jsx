@@ -7,6 +7,7 @@ const App = lazy(() => import("./App"));
 const ErrorBoundary = lazy(() => import("component/errorBoundary"));
 
 const renderLoader = () => <p className="loading-text">Loading...</p>;
+
 const client = new ApolloClient({
 	uri: "https://api.blocktap.io/graphql",
 	cache: new InMemoryCache(),

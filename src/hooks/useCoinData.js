@@ -1,8 +1,7 @@
 import React from "react";
 import { useLazyQuery } from "@apollo/client";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { PRICE } from "../component/query/query";
+import { PRICE } from "../query/query";
 
 export default function useCoinData() {
     const [coins, setCoins] = React.useState([]);
@@ -16,10 +15,10 @@ export default function useCoinData() {
             },
             fetchPolicy: "network only",
             onCompleted: (data) => {
-                let coinsExist = coins?.find(coin => coin.code === coinCode);
+                let coinExist = coins?.find(coin => coin.code === coinCode);
                 let noCoinsFound = data?.markets?.length === 0;
 
-                if (coinsExist) {
+                if (coinExist) {
                     toast.error("Coin already exists");
                     setCode("");
                     return;

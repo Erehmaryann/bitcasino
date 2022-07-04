@@ -1,6 +1,5 @@
 import React, { lazy } from "react";
 import PropTypes from "prop-types";
-import { ToastContainer } from "react-toastify";
 import useCoinData from "hooks/useCoinData";
 
 const CryptoList = lazy(() => import("../cryptoList"));
@@ -42,7 +41,6 @@ const Hero = () => {
 
 				<CryptoList data={coins} setCoins={setCoins} />
 			</section>
-			<ToastContainer />
 		</main>
 	);
 };
