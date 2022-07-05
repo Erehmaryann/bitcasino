@@ -20,7 +20,7 @@ const Hero = () => {
 
 	if (error)
 		return (
-			<p style={{ color: "white", paddingTop: "2rem", fontSize: "1.5rem" }}>
+			<p style={{ color: "red", paddingTop: "2rem", fontSize: "1.5rem" }}>
 				Error! `${error}`
 			</p>
 		);
